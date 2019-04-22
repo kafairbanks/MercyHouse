@@ -1,0 +1,36 @@
+
+<h3 style="margin:30px">Booking <%= @booking.id %></h3>
+<p id="notice"><%= notice %></p>
+<table class="table table-striped table-responsive" style="margin:30px">
+  <tbody>
+  <tr>
+    <td scope="row">Applicant</td>
+    <td scope="row"><%= link_to @booking.AName, applicant_path(@booking.applicants_id) %></td>
+  </tr>
+  <tr>
+    <td scope="row">Mercy House</td>
+    <td scope="row"><%= @booking.HouseName %></td>
+  </tr>
+  <tr>
+    <td scope="row">Mercy Room</td>
+    <td scope="row"><%= @booking.RoomName %></td>
+  </tr>
+  <tr>
+    <td scope="row">Start Date</td>
+    <td scope="row"><%= @booking.StartDate.nil? ? nil : @booking.StartDate.strftime("%m/%d/%Y") %></td>
+  </tr>
+  <tr>
+    <td scope="row">End Date</td>
+    <td scope="row"><%= @booking.EndDate.nil? ? nil : @booking.EndDate.strftime("%m/%d/%Y") %></td>
+  </tr>
+  <tr>
+    <td scope="row" colspan="2" align="center"><%= link_to "See application", application_path(@booking.application_id) %></td>
+  </tr>
+
+  </tbody>
+</table>
+<div style="margin:30px">
+  <%= link_to 'Edit', edit_booking_path(@booking) %> |
+  <%= link_to 'Back', bookings_path %> |
+  <%= link_to 'Delete', @booking, method: :delete, data: { confirm: 'Are you sure you want delete this booking?' } %>
+</div>

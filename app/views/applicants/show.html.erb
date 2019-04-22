@@ -1,0 +1,231 @@
+<h3 style="margin:30px">Applicant <%= @applicant.id %></h3>
+
+<p id="notice"><%= notice %></p>
+
+<div style="margin:30px">
+  <%if session[:user_role] == "admin"%>
+    <%= link_to 'Back', applicants_path %> |
+  <%end%>
+  <%= link_to 'Edit', edit_applicant_path(@applicant) %> |
+  <!-- The applicants would go back to their dashboard but the admins can see all of the applicants -->
+  <%if session[:user_role] == "admin"%>
+    <%= link_to 'See their applications', applications_path+"?utf8=✓&name=#{@applicant.AName}&commit=Search&show_booked=" %>
+  <%else%>
+    <%= link_to 'Back to dashboard', show_dash_path %>
+  <%end%>
+</div>
+<table class="table table-striped table-responsive" style="margin:30px">
+  <tbody>
+
+  <tr>
+    <td scope="row">Name</td>
+    <td scope="row"><%= @applicant.AName %></td>
+  </tr>
+  <tr>
+    <td scope="row">Email</td>
+    <td scope="row"><%= @applicant.AEmail %></td>
+  </tr>
+  <tr>
+    <td scope="row">Minor?</td>
+    <td scope="row"><%= check_box_tag 'AMinor', '', @applicant.AMinor, onclick:"return false;" %></td>
+  </tr>
+  <tr>
+    <td scope="row">Age</td>
+    <td scope="row"><%= @applicant.AAge %></td>
+  </tr>
+  <tr>
+    <td scope="row">Caregiver ID</td>
+    <td scope="row"><%= @applicant.CareGiverID %></td>
+  </tr>
+  <tr>
+    <td scope="row">Caregiver Name</td>
+    <td scope="row"><%= @applicant.CGName %></td>
+  </tr>
+  <tr>
+    <td scope="row">Caregiver Home Phone</td>
+    <td scope="row"><%= @applicant.CGHomePhone %></td>
+  </tr>
+  <tr>
+    <td scope="row">Caregiver Cell Phone</td>
+    <td scope="row"><%= @applicant.CGCellPhone %></td>
+  </tr>
+  <tr>
+    <td scope="row">Caregiver Address</td>
+    <td scope="row"><%= @applicant.CGAddress %></td>
+  </tr>
+  <tr>
+    <td scope="row">Caregiver City</td>
+    <td scope="row"><%= @applicant.CGCity %></td>
+  </tr>
+  <tr>
+    <td scope="row">Caregiver State</td>
+    <td scope="row"><%= @applicant.CGState %></td>
+  </tr>
+  <tr>
+    <td scope="row">Caregiver ZIP</td>
+    <td scope="row"><%= @applicant.CGZip %></td>
+  </tr>
+  <tr>
+    <td scope="row">Caregiver Email</td>
+    <td scope="row"><%= @applicant.CGEmail %></td>
+  </tr>
+  <tr>
+    <td scope="row">Spouse/Parent Name</td>
+    <td scope="row"><%= @applicant.SPName %></td>
+  </tr>
+  <tr>
+    <td scope="row">Spouse/Parent Home Phone</td>
+    <td scope="row"><%= @applicant.SPHomePhone %></td>
+  </tr>
+  <tr>
+    <td scope="row">Spouse/Parent Cell Phone</td>
+    <td scope="row"><%= @applicant.SPCellPhone %></td>
+  </tr>
+  <tr>
+    <td scope="row">Spouse/Parent Address</td>
+    <td scope="row"><%= @applicant.SPAddress %></td>
+  </tr>
+  <tr>
+    <td scope="row">Spouse/Parent City</td>
+    <td scope="row"><%= @applicant.SPCity %></td>
+  </tr>
+  <tr>
+    <td scope="row">Spouse/Parent State</td>
+    <td scope="row"><%= @applicant.SPState %></td>
+  </tr>
+  <tr>
+    <td scope="row">Spouse/Parent ZIP</td>
+    <td scope="row"><%= @applicant.SPZip %></td>
+  </tr>
+  <tr>
+    <td scope="row">Spouse/Parent Email</td>
+    <td scope="row"><%= @applicant.SPEmail %></td>
+  </tr>
+  <tr>
+    <td scope="row">Primary Emergency Contact</td>
+    <td scope="row"><%= @applicant.EC1Name %></td>
+  </tr>
+  <tr>
+    <td scope="row">Primary's Home Phone</td>
+    <td scope="row"><%= @applicant.EC1HomePhone %></td>
+  </tr>
+  <tr>
+    <td scope="row">Primary's Cell Phone</td>
+    <td scope="row"><%= @applicant.EC1CellPhone %></td>
+  </tr>
+  <tr>
+    <td scope="row">Primary's Address</td>
+    <td scope="row"><%= @applicant.EC1Address %></td>
+  </tr>
+  <tr>
+    <td scope="row">Primary's City</td>
+    <td scope="row"><%= @applicant.EC1City %></td>
+  </tr>
+  <tr>
+    <td scope="row">Primary's State</td>
+    <td scope="row"><%= @applicant.EC1State %></td>
+  </tr>
+  <tr>
+    <td scope="row">Primary's ZIP</td>
+    <td scope="row"><%= @applicant.EC1Zip %></td>
+  </tr>
+  <tr>
+    <td scope="row">Primary's Email</td>
+    <td scope="row"><%= @applicant.EC1Email %></td>
+  </tr>
+  <tr>
+    <td scope="row">Secondary Emergency Contact</td>
+    <td scope="row"><%= @applicant.EC2Name %></td>
+  </tr>
+  <tr>
+    <td scope="row">Secondary's Home Phone</td>
+    <td scope="row"><%= @applicant.EC2HomePhone %></td>
+  </tr>
+  <tr>
+    <td scope="row">Secondary's Cell Phone</td>
+    <td scope="row"><%= @applicant.EC2CellPhone %></td>
+  </tr>
+  <tr>
+    <td scope="row">Secondary's Address</td>
+    <td scope="row"><%= @applicant.EC2Address %></td>
+  </tr>
+  <tr>
+    <td scope="row">Secondary's City</td>
+    <td scope="row"><%= @applicant.EC2City %></td>
+  </tr>
+  <tr>
+    <td scope="row">Secondary's State</td>
+    <td scope="row"><%= @applicant.EC1State %></td>
+  </tr>
+  <tr>
+    <td scope="row">Secondary's ZIP</td>
+    <td scope="row"><%= @applicant.EC2Zip %></td>
+  </tr>
+  <tr>
+    <td scope="row">Secondary's Email</td>
+    <td scope="row"><%= @applicant.EC2Email %></td>
+  </tr>
+  <tr>
+    <td scope="row">Allow Name Use?</td>
+    <td scope="row"><%= check_box_tag 'allowsUseOfName', '', @applicant.allowsUseOfName, onclick:"return false;" %></td>
+  </tr>
+
+  <!--Only the Admins can edit the red tagging and application permission-->
+  <%if session[:user_role] == "admin"%>
+    <tr>
+      <td scope="row">Red Flag?</td>
+      <td scope="row">
+        <%= check_box_tag 'redFlag', '', @applicant.redFlag, onclick:"return false;" %>
+      </td>
+    </tr>
+    <% if @applicant.redFlag %>
+    <tr>
+      <td scope="row"> Red Flagged Reason: </td> 
+      <td scope="row">
+        <%= @applicant.RedFlagReason %> 
+      </td>
+    </tr>
+    <%end%>
+    <tr>
+      <td scope="row">Can submit application?</td>
+      <td scope="row"><%= check_box_tag 'canSubmitApplication', '', @applicant.canSubmitApplication, onclick:"return false;" %></td>
+    </tr>
+    <tr>
+      <td scope="row">Background Check Completed?</td>
+      <td scope="row">
+        <%= check_box_tag 'BackgroundCheckCompleted', '', @applicant.BackgroundCheckCompleted, onclick:"return false;" %>
+        <% if @applicant.BackgroundCheckCompleted %><%= @applicant.BackgroundCheckDate %><%end%>
+      </td>
+    </tr>
+
+    <tr>
+      <td scope="row"> Background Check Waived? </td>
+      <td scope="row">
+        <%= check_box_tag 'BackgroundCheckWaived', '', @applicant.BCWaived, onclick:"return false;"%>
+      </td>
+      <% if @applicant.BCWaived %>
+      <tr>
+        <td scope="row"> Reason for waiving background check: </td>
+        <td>
+          <%= @applicant.BCReason %>
+        </td>
+      </tr>
+      <%end%>
+    </tr>
+  <%end%>
+
+  </tbody>
+</table>
+
+<div style="margin:30px">
+  <%if session[:user_role] == "admin"%>
+    <%= link_to 'Back', applicants_path %> |
+  <%end%>
+  <%= link_to 'Edit', edit_applicant_path(@applicant) %> |
+  <!-- The applicants would go back to their dashboard but the admins can see all of the applicants -->
+  <%if session[:user_role] == "admin"%>
+    <%= link_to 'See their applications', applications_path+"?utf8=✓&name=#{@applicant.AName}&commit=Search&show_booked=" %>
+<%else%>
+    <%= link_to 'Back to dashboard', show_dash_path %>
+  <%end%>
+</div>

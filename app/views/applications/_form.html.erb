@@ -1,0 +1,110 @@
+<%= form_with(model: application, local: true) do |form| %>
+  <% if application.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(application.errors.count, "error") %> prohibited this application from being saved:</h2>
+
+      <ul>
+      <% application.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <h4 class="header">Medical / Additional Information</h4>
+
+  <div class="form-row">
+    <%if session[:user_role] == "admin"%>
+      <div class="field form-group col-md-6">
+        <%= form.label :applicants_id, "Applicant ID" %>
+        <%= form.text_field :applicants_id, id: "applicants_id", class: "form-control", value: session[:applicants_id], :required => true %>
+      </div>
+    <%else%>
+      <div class="field form-group col-md-6">
+        <%= form.label :applicants_id, "Applicant ID" %>
+        <%= form.text_field :applicants_id, id: "applicants_id", class: "form-control", value: session[:applicants_id], readonly: true, :required => true %>
+      </div>
+    <%end%>
+    <div class="field form-group col-md-6">
+      <%= form.label :Date, "Today's Date" %>
+      <%= form.date_field :ApplicationDate, value: Date.today, id: "ApplicationDate", class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="field form-group col-md-6">
+      <%= form.label :HospitalName, "Hospital Name" %>
+      <%= form.text_field :HospitalName, id: "HospitalName", class: "form-control", placeholder: "Hospital Name", :required => true %>
+    </div>
+    <div class="field form-group col-md-6">
+      <%= form.label :DoctorName, "Medical Doctor" %>
+      <%= form.text_field :DoctorName, id: "DoctorName", class: "form-control", placeholder: "Doctor Name", :required => true %>
+    </div>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :TreatmentPlan, "Treatment Plan (if known)" %>
+    <%= form.text_field :TreatmentPlan, id: "TreatmentPlan", class: "form-control", placeholder: "Treatment Plan" %>
+  </div>
+
+  <div class="form-row">
+    <div class="field form-group col-md-6">
+      <%= form.label :ArrivalDate, "Arrival Date (this visit)" %>
+      <%= form.date_field :ArrivalDate, id: "ArrivalDate", class: "form-control", :required => true %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="field form-group col-md-6">
+      <%= form.label :DepartureDate, "Departure Date" %>
+      <%= form.date_field :DepartureDate, id: "DepartureDate", class: "form-control", :required => true %>
+    </div>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :futureScheduledAppts, "Please list any future scheduled appointments if you know them" %>
+    <%= form.text_field :futureScheduledAppts, id: "futureScheduledAppts", class: "form-control", placeholder: "Scheduled Appointments" %>
+  </div>
+
+  <div class="form-group" style="font-weight: bold;">
+    Check the following if it applies to you
+  </div>
+
+  <div class="field form-group">
+    <%= form.check_box :isFirstVisit, style: "margin-right: 10px;" %>
+    <%= form.label :isFirstVisit, "It is my first visit to Mercy House" %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.check_box :appliedForLongTermHousing, style: "margin-right: 10px;" %>
+    <%= form.label :appliedForLongTermHousing, "I have applied for long-term housing" %>
+  </div>
+
+  <!-- <div class="field form-group row">
+    <div class="col-sm-1" style="margin-left: 50px;">
+      <%= form.label :whereLongTermHousing,  "Where?" %>
+    </div>
+    <div class="col-sm-3">
+      <%= form.text_field :whereLongTermHousing, id: "whereLongTermHousing", class: "form-control", placeholder: "Long-Term Housing" %>
+    </div>
+  </div> -->
+
+  <div class="field form-group">
+    <%= form.check_box :insuranceCoversHousing, style: "margin-right: 10px;" %>
+    <%= form.label :insuranceCoversHousing, "My insurance covers housing charges" %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.check_box :wantsInfo, style: "margin-right: 10px;" %>
+    <%= form.label :wantsInfo, "I would like to receive information about Mercy House" %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :prayerRequests, "How may we pray for you?" %>
+    <%= form.text_field :prayerRequests, id: "prayerRequests", class: "form-control", placeholder: "Prayer Requests" %>
+  </div>
+
+  <div class="actions" align="center">
+    <%= form.submit "Submit Application", class: "btn btn-primary" %>
+  </div>
+<% end %>

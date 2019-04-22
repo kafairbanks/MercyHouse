@@ -1,0 +1,21 @@
+// Place all the styles related to the login controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+  background-image: image-url('/medical_center.jpg');
+  background-size: 100vw 100vh;
+}
+
+div.container {
+  position: relative;
+  height: 100%;
+}
+
+div.card {
+  position: relative;
+  top: 25%;
+  -webkit-transform: translateY(25%);
+  -ms-transform: translateY(25%);
+  transform: translateY(25%);
+}

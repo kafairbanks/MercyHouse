@@ -1,0 +1,34 @@
+<%= form_with(local: true) do |form| %>
+
+  <h5 class="header" style="margin-bottom:5px" >
+    Filters
+  </h5>
+  <div class="form-row">
+    <div class="field form-group col-md-2">
+      <%= form.select :mhome, @mercyhomes,
+                      {:include_blank => 'All', :selected => params[:mhome]},
+                      :onchange => 'this.form.submit()',
+                      class: "form-control" %>
+    </div>
+
+    <div class="field form-group col-md-2">
+      <%= form.date_select :cal_month,
+                           {:selected => !params['start_date'].nil? ? Date.parse(params['start_date'].to_s) : Date.today,
+                            order: [:month]}, :onchange => 'this.form.submit()', class:  'form-control' %>
+    </div>
+
+    <div class="field form-group col-md-2">
+      <%= form.date_select :cal_year,
+                           {:selected => !params['start_date'].nil? ? Date.parse(params['start_date'].to_s) : Date.today,
+                            order: [:year],
+                            start_year: params['start_date'].year < Date.today.year - 5 ? params['start_date'].year : Date.today.year - 3,
+                            end_year: params['start_date'].year > Date.today.year + 3 ? params['start_date'].year : Date.today.year + 3},
+                            :onchange => 'this.form.submit()', class:  'form-control' %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit 'Today', class: "btn btn-primary" %>
+    </div>
+  </div>
+
+<%end%>

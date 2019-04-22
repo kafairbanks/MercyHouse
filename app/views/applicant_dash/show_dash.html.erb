@@ -1,0 +1,61 @@
+<p id="notice"><%= notice %></p>
+
+<h1 style="padding: 2%;">Dashboard</h1>
+
+<h4 style="padding: 2%;">Application Status</h4>
+
+<%if @application%>
+  <div class="progress" style="height: 40px; margin-bottom:40px; margin-left: 2%; margin-right: 2%;">
+    <div class="progress-bar" role="progressbar" style="width: <%=  @application.getProgress%>%;" aria-valuenow="<%=  @application.getProgress%>" aria-valuemin="0" aria-valuemax="100"><%=  @application.ApplicationStatus%></div>
+  </div>
+<%else%>
+  <h5>No Application on File to Show Status</h5>
+<%end%>
+
+  <div style="padding-bottom: 2%; padding-left: 2%; padding-right: 2%;">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">
+          <%= @applicant.AName %>
+        </h5>
+        <h6 class="card-subtitle mb-2 text-muted"><%= @applicant.AEmail %></h6>
+        <h7 class="card-link"><%= link_to 'See my Information', @applicant %></h7>
+        <h7 class="card-link"><%= link_to 'Update my Information', edit_applicant_path(session[:applicants_id]) %></h7>
+      </div>
+    </div>
+  </div>
+
+<%if @application%>
+  <div align="center">
+    <%= link_to 'View My Application', @application, class: "btn btn-primary", style:"margin:30px" %>
+  </div>
+
+  <%if @application.booked %>
+    <h4 style="margin:30px">Your Booking</h4>
+
+    <div style="padding-bottom: 2%; padding-left: 2%; padding-right: 2%;">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= @booking.RoomName %>
+          </h5>
+          <h6 class="card-subtitle mb-2 text-muted"><%= @booking.HouseName %></h6>
+          <h6 class="card-subtitle mb-2 text-muted"><%= @booking.HouseAddress %></h6>
+          <h6 class="card-subtitle mb-2 text-muted"><%= @booking.HouseCity %>, <%= @booking.HouseState %> <%= @booking.HouseZip %></h6>
+          <h7 class="card-subtitle"><%= @booking.StartDate.nil? ? nil : @booking.StartDate.strftime("%m/%d/%Y") %> - </h7>
+          <h7 class="card-subtitle"><%= @booking.EndDate.nil? ? nil : @booking.EndDate.strftime("%m/%d/%Y") %></h7>
+        </div>
+      </div>
+    </div>
+  <%end%>
+<%end%>
+
+<%if @applicant.canSubmitApplication %>
+  <div class="container-fluid components" align="center">
+    <a class="btn" href=<%= new_application_path(:applicants_id => session[:applicants_id]) %> role="button">
+      Submit a New Application
+    </a>
+  </div>
+<%end%>
+
+

@@ -1,0 +1,2 @@
+json.extract! application, :id, :applicants_id, :ApplicationDate, :ApplicationStatus, :HospitalName, :DoctorName, :TreatmentPlan, :appliedForLongTermHousing, :where, :LongTermHousing, :prayerRequests, :isFirstVisit, :wantsInfo, :insuranceCoversHousing, :futureScheduledAppts, :ArrivalDate, :DepartureDate, :lockApplication, :created_at, :updated_at
+json.url application_url(application, format: :json)

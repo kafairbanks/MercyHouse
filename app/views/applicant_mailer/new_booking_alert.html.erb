@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Hello <%= @applicant.AName %>,</h1>
+    <p>
+     A new booking has been created with Mercy House.<br/>
+    </p>
+    <p>
+      Booking information:<br/><br/>
+      House Coordinator Name: <%= @coordinator.HCName %><br/>
+      House Coordinator Email: <%= @coordinator.HCEmail %><br/>
+      Mercy House Name: <%= @mercyhome.HouseName %><br/>
+      Mercy House Address: <%= @mercyhome.HouseAddress %><br/>
+      Room Name: <%= @mercyroom.RoomName %><br/>
+      Room Description: <%= @mercyroom.RoomDesc %><br/>
+      Start Date: <%= @booking.StartDate %><br/>
+      End Date: <%= @booking.EndDate %><br/>
+    </p>
+  </body>
+</html>
+
+
+
+
+ 

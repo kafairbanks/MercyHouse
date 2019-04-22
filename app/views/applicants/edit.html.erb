@@ -1,0 +1,72 @@
+<p id="notice"><%= notice %></p>
+
+<div style="margin:30px">
+  <h1>Editing Applicant</h1>
+  <br>
+  <%= form_with(model: @applicant, local: true) do |form| %>
+    <% if @applicant.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@applicant.errors.count, "error") %> prohibited this applicant from being saved:</h2>
+
+        <ul>
+          <% @applicant.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <!--Only the Admins can edit the red tagging and application permission-->
+    <%if session[:user_role] == "admin"%>
+      <div class="form-row">
+        <div class="field form-group col-md-4">
+          <%= form.check_box :redFlag, style: "margin-right: 10px;" %>
+          <%= form.label :redFlag, "Red Tag" %>
+        </div>
+        <div class="field form-group col-md-6">
+          <%= form.label :RedFlagReason, "Reason for red tagging: "%>
+          <%= form.text_field :RedFlagReason, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="field form-group col-md-4">
+          <%= form.check_box :canSubmitApplication, style: "margin-right: 10px;" %>
+          <%= form.label :canSubmitApplication, "Allow Application Submission" %>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="field form-group col-md-4">
+          <%= form.check_box :BackgroundCheckCompleted, style: "margin-right: 10px;" %>
+          <%= form.label :BackgroundCheckCompleted, "Background Check Completed" %>
+        </div>
+        <div class="field form-group col-md-4">
+          <%= form.label :BackgroundCheckDate, "Date Background Check Completed" %>
+          <%= form.date_field :BackgroundCheckDate, id: "BackgroundCheckDate", class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="field form-group col-md-4">
+          <%= form.check_box :BCWaived, style: "margin-right: 10px;"%>
+          <%= form.label :BCWaived, "Background Check Waived"%>
+        </div>
+        <div class="field form-group col-md-6">
+          <%= form.label :BCReason, "Reason for waiving background check: "%>
+          <%= form.text_field :BCReason, class: "form-control" %>
+        </div>
+      </div>
+      <div class="actions" style="padding-bottom: 2%;" align="center">
+        <%= form.submit "Update", class: "btn btn-danger" %>
+      </div>
+    <%end%>
+  <% end %>
+
+  <%= render 'edit_form', applicant: @applicant %>
+
+  <%= link_to 'Details', @applicant %> |
+  
+  <%if session[:user_role] == "admin"%>
+    <%= link_to 'See all applicants', applicants_path %>
+  <%else%>
+    <%= link_to 'Back to dashboard', show_dash_path %>
+  <%end%>
+</div>

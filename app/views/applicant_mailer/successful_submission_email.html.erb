@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Thank you for submitting an application to Mercy House, <%= @applicant.AName %></h1>
+    <p>
+      We have received your application,
+      <strong> your applicant identification number is: <%= @applicant.id %></strong>.<br/>
+    </p>
+    <p>
+      To view your application status follow this link: <%= @url %>
+    </p>
+  </body>
+</html>

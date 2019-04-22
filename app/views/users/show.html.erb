@@ -1,0 +1,39 @@
+<h3 style="margin:30px">User <%= @user.name %></h3>
+<p id="notice"><%= notice %></p>
+<table class="table table-striped table-responsive" style="margin:30px">
+  <tbody>
+  <tr>
+    <td scope="row">Name</td>
+    <td scope="row"><%= @user.name %></td>
+  </tr>
+  <tr>
+    <td scope="row">Email</td>
+    <td scope="row"><%= @user.email %></td>
+  </tr>
+  <tr>
+    <td scope="row">UID</td>
+    <td scope="row"><%= @user.uid %></td>
+  </tr>
+  <tr>
+    <td scope="row">Provider</td>
+    <td scope="row"><%= @user.provider %></td>
+  </tr>
+  <tr>
+    <td scope="row">Role</td>
+    <td scope="row"><%= @user.role %></td>
+  </tr>
+  <tr>
+    <td scope="row">OAuth Expires At</td>
+    <td scope="row"><%= @user.oauth_expires_at %></td>
+  </tr>
+  <tr>
+    <td scope="row">OAuth Last Updated</td>
+    <td scope="row"><%= @user.updated_at %></td>
+  </tr>
+
+  </tbody>
+</table>
+<div style="margin:30px">
+  <%= link_to 'Edit', edit_user_path(@user) %> |
+  <%= link_to 'Back', users_path %>
+</div>

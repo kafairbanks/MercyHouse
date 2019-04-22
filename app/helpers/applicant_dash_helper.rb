@@ -1,0 +1,2 @@
+module ApplicantDashHelper
+end

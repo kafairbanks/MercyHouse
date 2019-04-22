@@ -1,0 +1,55 @@
+<%= form_with(model: mercyhome, local: true) do |form| %>
+  <% if mercyhome.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(mercyhome.errors.count, "error") %> prohibited this mercyhome from being saved:</h2>
+
+      <ul>
+        <% mercyhome.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-row">
+    <div class="field form-group col-md-12">
+      <%= form.label :HouseName, "House Name" %>
+      <%= form.text_field :HouseName, id: "HouseName", class: "form-control", placeholder: "House Name", value: @mercyhome.HouseName, :required => true %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="field form-group col-md-12">
+      <%= form.label :HouseAddress, "House Address" %>
+      <%= form.text_field :HouseAddress, id: "HouseAddress", class: "form-control", placeholder: "123 Main St", value: @mercyhome.HouseAddress, :required => true %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="field form-group col-md-4">
+      <%= form.label :HouseCity, "City" %>
+      <%= form.text_field :HouseCity, id: "HouseCity", class: "form-control", placeholder: "City", value: @mercyhome.HouseCity, :required => true %>
+    </div>
+
+    <div class="field form-group col-md-4">
+      <%= form.label :HouseState, "State" %>
+      <%= form.text_field :HouseState, id: "HouseState", class: "form-control", placeholder: "State", value: @mercyhome.HouseState, :required => true %>
+    </div>
+
+    <div class="field form-group col-md-4">
+      <%= form.label :HouseZip, "Zip" %>
+      <%= form.number_field :HouseZip, id: "HouseZip", class: "form-control", placeholder: "Zip", value: @mercyhome.HouseZip, :required => true %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="field form-group col-md-4">
+      <%= form.label :coordinators_id, "Please select a coordinator:" %>
+      <%= form.select :coordinators_id, options_for_select(@cList, {selected: @mercyhome.coordinators_id}), {}, id: "coordinators_id", class: "form-control", :required => true %>
+    </div>
+  </div>
+
+  <div class="actions" align="center">
+    <%= form.submit "Create House", class: "btn btn-primary" %>
+  </div>
+<% end %>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>(Red Flagged) An application has been submitted by, <%= @applicant.AName %></h1>
+    <p>
+      Applicant information: <br/>
+      <strong>Name: <%= @applicant.AName %></strong><br/>
+      <strong>Email: <%= @applicant.AEmail %></strong><br/>
+      <strong>Application Date: <%= @application.ApplicationDate %></strong><br/>
+      <strong>Arrival Date: <%= @application.ArrivalDate %></strong><br/>
+      <strong>Departure Date: <%= @application.DepartureDate %></strong><br/>
+    <br/>
+      <strong> The applicant id is: <%= @applicant.id %></strong>.<br/>
+      <strong> The application id is: <%= @application.id %></strong>.<br/>
+    </p>
+    <p>
+      To view your application status follow this link: <%= @url %>
+    </p>
+  </body>
+</html>

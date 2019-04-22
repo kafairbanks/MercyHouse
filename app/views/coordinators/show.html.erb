@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<table class="table table-striped table-responsive" style="margin:30px">
+  <tbody>
+
+  <tr>
+    <td scope="row">Name</td>
+    <td scope="row"><%= @coordinator.HCName %></td>
+  </tr>
+  <tr>
+    <td scope="row">Email</td>
+    <td scope="row"><%= @coordinator.HCEmail %></td>
+  </tr>
+  <tr>
+    <td scope="row">Phone</td>
+    <td scope="row"><%= @coordinator.HCPhone %></td>
+  </tr>
+
+  </tbody>
+</table>
+
+<div style="margin:30px">
+  <%= link_to 'Edit', edit_coordinator_path(@coordinator) %> |
+  <%= link_to 'Back', coordinators_path %>
+</div>

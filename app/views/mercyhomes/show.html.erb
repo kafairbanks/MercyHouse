@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<table class="table table-striped table-responsive" style="margin:30px">
+  <tbody>
+
+  <tr>
+    <td scope="row">Name</td>
+    <td scope="row"><%= @mercyhome.HouseName %></td>
+  </tr>
+  <tr>
+    <td scope="row">Address</td>
+    <td scope="row"><%= @mercyhome.HouseAddress %></td>
+  </tr>
+  <tr>
+    <td scope="row">City</td>
+    <td scope="row"><%= @mercyhome.HouseCity %></td>
+  </tr>
+  <tr>
+    <td scope="row">State</td>
+    <td scope="row"><%= @mercyhome.HouseState %></td>
+  </tr>
+  <tr>
+    <td scope="row">ZIP Code</td>
+    <td scope="row"><%= @mercyhome.HouseZip %></td>
+  </tr>
+  <tr>
+    <td scope="row">Coordinator Name</td>
+    <td scope="row"><%= @coordinator.HCName %></td>
+  </tr>
+  <tr>
+    <td scope="row">Coordinator Email</td>
+    <td scope="row"><%= @coordinator.HCEmail %></td>
+  </tr>
+
+  </tbody>
+</table>
+<div style="margin:30px">
+  <%= link_to 'Edit', edit_mercyhome_path(@mercyhome) %> |
+  <%= link_to 'Back', mercyhomes_path %>
+</div>

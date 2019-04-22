@@ -1,0 +1,13 @@
+rails generate scaffold Admin AdminUsername:integer AdminPass:string --no-migration
+
+rails generate scaffold Applicant AName:string AEmail:string AMinor:boolean AAge:integer CareGiverID:integer CGName:string CGHomePhone:string CGCellPhone:string CGAddress:string CGCity:string CGState:string CGZip:string CGEmail:string SPName:string SPHomePhone:string SPCellPhone:string SPAddress:string SPCity:string SPState:string SPZip:string SPEmail:string EC1Name:string EC1HomePhone:string EC1CellPhone:string EC1Address:string EC1City:string ECIState:string EC1Zip:string EC1Email:string EC2Name:string EC2HomePhone:string EC2CellPhone:string EC2Address:string EC2City:string EC2State:string EC2Zip:string EC2Email:string allowsUseOfName:boolean redFlag:boolean --no-migration
+
+rails generate scaffold Application applicants:references ApplicationDate:datetime ApplicationStatus:string HospitalName:string DoctorName:string TreatmentPlan:string appliedForLongTermHousing:boolean where LongTermHousing:string prayerRequests:string isFirstVisit:boolean wantsInfo:boolean insuranceCoversHousing:boolean futureScheduledAppts:string ArrivalDate:datetime DepartureDate:datetime lockApplication:boolean --no-migration
+
+rails generate scaffold Booking applicants:references mercyrooms:references StartDate:datetime EndDate:datetime --no-migration
+
+rails generate scaffold Coordinator HCName:string HCPhone:string HCEmail:string --no-migration
+
+rails generate scaffold Mercyhome HouseName:string HouseAddress:string HouseCity:string HouseState:string HouseZip:string coordinators:references --no-migration
+
+rails generate scaffold Mercyroom mercyhomes:references RoomName:string RoomDesc:string --no-migration

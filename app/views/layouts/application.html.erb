@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>MercyHouse</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+<div id="wrapper">
+  <nav id="sidebar">
+    <div class="sidebar-header">
+      <img src="/mercy_transparent.png" class="logo">
+    </div>
+    <ul class="list-unstyled components">
+      <% if session[:user_role] == "admin" %>
+          <li>
+            <%= link_to 'Applicants', applicants_path %>
+          </li>
+          <li>
+            <%= link_to 'Applications', applications_path %>
+          </li>
+        <li class="active">
+          <a href="#bookingSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Bookings</a>
+          <ul class="collapse list-unstyled" id="bookingSubmenu">
+            <li>
+              <%= link_to 'Create a Booking', applications_path %>
+            </li>
+            <li>
+              <%= link_to 'See Bookings', bookings_path %>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <%= link_to 'Calendar', calendar_path %>
+        </li>
+        <li>
+          <%= link_to 'Generate Room Report', new_report_path %>
+        </li>
+        <li class="active">
+          <a href="#houseSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Houses & Rooms</a>
+          <ul class="collapse list-unstyled" id="houseSubmenu">
+            <li>
+              <%= link_to 'Create a House', new_mercyhome_path %>
+            </li>
+            <li>
+              <%= link_to 'See Houses', mercyhomes_path %>
+            </li>
+            <li>
+              <%= link_to 'See Rooms', mercyrooms_path %>
+            </li>
+          </ul>
+          <a href="#coordinatorSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Housing Coordinators</a>
+          <ul class="collapse list-unstyled" id="coordinatorSubmenu">
+            <li>
+              <%= link_to 'Create a Housing Coordinator', new_coordinator_path %>
+            </li>
+            <li>
+              <%= link_to 'See Coordinators', coordinators_path %>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <%= link_to "Users", users_path %>
+        </li>
+      <%end%>
+      <% if (session[:user_role] != "admin") && (session[:user_role] == "user") && (session[:finished_signin]) %>
+        <li class="nav-item">
+          <a class="nav-link active" href="<%= show_dash_path%>">Dashboard</a>
+        </li>
+      <%end%>
+      </ul>
+
+      <div class="container-fluid components" align="center">
+        <% if session[:user_id].nil? %>
+          <a class="btn" href="/login" role="button">
+            Log In
+          </a>
+        <% else %>
+          <a class="btn" href="/signout" data-method="delete" rel="nofollow" role="button">
+            Log Out
+          </a>
+        <%end%>
+      </div>
+      </nav>
+  <div id="content">
+    <button class="btn" id="menu-toggle" style="padding: 7px;">
+      <img src="/baseline_menu_white_48dp.png" style="width: 20px;">
+    </button>
+    <div style="margin:30px">
+      <%= yield %>
+    </div>
+  </div>
+</div>
+
+
+<script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+</script>
+</body>
+</html>

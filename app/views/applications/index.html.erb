@@ -1,0 +1,102 @@
+<p id="notice"><%= notice %></p>
+
+<h1 style="margin:30px">Applications</h1>
+
+<%= form_tag applications_path, :method => :get do %>
+  <div class="form-row default-margin">
+    <div class="field form-group col-md-2" style="margin-top: 5px;">
+      Applicant Name:
+    </div>
+    <div class="field form-group col-md-3">
+      <%= text_field_tag "name", nil, value: "#{params['name']}", class: "form-control" %>
+    </div>
+    <div class="field form-group col-md-3">
+      <%= submit_tag 'Search', class: "btn btn-primary mx-2" %>
+      <%= submit_tag 'Clear', class: "btn btn-primary mx-2" %>
+    </div>
+    <div class="field form-group col-md-4" align="right">
+      <%= link_to 'New Application', new_application_path, class: "btn btn-primary", style:"margin-left:2%" %>
+    </div>
+  </div>
+
+  <div class="form-row default-margin">
+    <div class="field form-group col-md-2" style="margin-top: 5px;">
+      Application Status:
+    </div>
+    <div class="field form-group col-md-2">
+      <%= select_tag :show_booked, options_for_select(@booked_options,
+                  {:selected => params[:show_booked]}), :include_blank => 'All',
+                     :onchange => 'this.form.submit()', :class => "form-control" %>
+    </div>
+
+    <% if @applications.all.to_a.length >= 10 or params[:page].to_i >= 1 %>
+      <div class="field form-group col-md-1" align="right" style="margin-top: 5px;">
+        Show:
+      </div>
+      <div class="field form-group col-md-1">
+        <%= select_tag :per_page, options_for_select(@per_page_hash,
+                                                     {:selected => params[:per_page]}),
+                       :onchange => 'this.form.submit()', :class => "form-control" %>
+      </div>
+      <div class="field form-group col-md-6" align="right">
+        <%= will_paginate @applications, renderer: BootstrapPaginationHelper::LinkRenderer %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<% @applications.each do |application| %>
+  <div style="padding-bottom: 2%; padding-left: 2%; padding-right: 2%;">
+    <div class="card <%= application.redFlag ? "red-flag" : ""%> <%= application.booked ? "green-flag" : "" %>">
+      <div class="card-body">
+        <h6 class="card-title">
+          <%= link_to 'Application ' + application.id.to_s, application_path(application.id) %>
+        </h6>
+        <h6 class="card-subtitle text-muted form-row" style="padding-left: 2%;">
+          <h7 class="form-group col-md-2 mr-1 my-1">Submitted: </h7>
+          <h7 class="form-group col-md-3 mr-1 my-1"><%= Date.parse(application.ApplicationDate.to_s).strftime("%m/%d/%Y") %></h7>
+        </h6>
+
+        <h6 class="card-subtitle text-muted form-row" style="padding-left: 2%;">
+          <h7 class="form-group col-md-2 mr-1 my-1">Applicant: </h7>
+          <h7 class="form-group col-md-5 mr-1 my-1"><%= application.AName %></h7>
+        </h6>
+
+        <% if application.booked %>
+          <h6 class="card-subtitle text-muted form-row" style="padding-left: 2%;">
+            <h7 class="form-group col-md-2 mr-1 my-1">Booked: </h7>
+            <h7 class="form-group col-md-2 mr-1 my-1">Yes</h7>
+          </h6>
+        <% else %>
+          <h6 class="card-subtitle text-muted form-row" style="padding-left: 2%;">
+            <h7 class="form-group col-md-2 mr-1 my-1">Booked: </h7>
+            <h7 class="form-group col-md-2 mr-1 my-1">No</h7>
+          </h6>
+        <% end %>
+
+        <% if application.BackgroundCheckCompleted %>
+          <h6 class="card-subtitle text-muted form-row" style="padding-left: 2%;">
+            <h7 class="form-group col-md-2 mr-1 my-1">Background Check: </h7>
+            <h7 class="form-group col-md-5 mr-1 my-1">Completed - <%= Date.parse(application.BackgroundCheckDate.to_s).strftime("%m/%d/%Y") %></h7>
+          </h6>
+        <% elsif application.BCWaived %>
+          <h6 class="card-subtitle text-muted form-row" style="padding-left: 2%;">
+            <h7 class="form-group col-md-2 mr-1 my-1">Background Check: </h7>
+            <h7 class="form-group col-md-5 mr-1 my-1">Waived</h7>
+          </h6>
+        <% else %>
+          <h6 class="card-subtitle text-muted form-row" style="padding-left: 2%;">
+            <h7 class="form-group col-md-2 mr-1 my-1">Background Check: </h7>
+            <h7 class="form-group col-md-5 mr-1 my-1">Incomplete</h7>
+          </h6>
+        <% end %>
+
+        <div class="form-row m-2">
+          <h7 class="form-group card-link mb-2"><%= link_to 'Book', app_booking_path(application) %></h7>
+          <h7 class="form-group card-link mb-2"><%= link_to 'Edit', edit_application_path(application) %></h7>
+          <h7 class="form-group card-link mb-2"><%= link_to 'Delete', application, method: :delete, data: { confirm: 'Are you sure you want delete this application?' } %></h7>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

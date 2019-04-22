@@ -1,0 +1,107 @@
+
+<h3 style="margin:30px">Application <%= @application.id %></h3>
+<p id="notice"><%= notice %></p>
+
+<%if session[:user_role] == "admin" %>
+  <div class="actions" style="margin:30px">
+    <%= link_to 'Back', applications_path %> |
+    <%= link_to 'Edit', edit_application_path(@application) %> |
+    <%= link_to 'Book', app_booking_path(id: @application) %>
+  </div>
+<%else%>
+  <div style="margin:30px">
+    <%= link_to 'Back to dashboard', show_dash_path %>
+  </div>
+<%end %>
+
+
+<table class="table table-striped table-responsive" style="margin:30px">
+  <tbody>
+
+  <tr>
+    <td scope="row">Applicant</td>
+    <td scope="row"><%= link_to @application.AName, applicant_path(@application.applicants_id) %></td>
+  </tr>
+  <tr>
+    <td scope="row">Application Date</td>
+    <td scope="row"><%= Date.parse(@application.ApplicationDate.to_s).strftime("%m/%d/%Y") %></td>
+  </tr>
+  <tr>
+    <td scope="row">Application Status</td>
+    <td scope="row"><%= @application.ApplicationStatus %></td>
+  </tr>
+  <tr>
+    <td scope="row">Booked</td>
+    <td scope="row"><%= check_box_tag 'booked', '', @application.booked, onclick:"return false;" %></td>
+  </tr>
+  <tr>
+    <td scope="row">Background Check</td>
+    <td scope="row"><%= check_box_tag 'BackgroundCheckCompleted', '', @application.BackgroundCheckCompleted, onclick:"return false;" %></td>
+  </tr>
+  <tr>
+    <td scope="row">Background Check Date</td>
+    <td scope="row"><%= @application.BackgroundCheckDate %></td>
+  </tr>
+  <tr>
+    <td scope="row">Hospital Name</td>
+    <td scope="row"><%= @application.HospitalName %></td>
+  </tr>
+  <tr>
+    <td scope="row">Doctor Name</td>
+    <td scope="row"><%= @application.DoctorName %></td>
+  </tr>
+  <tr>
+    <td scope="row">Treatment Plan</td>
+    <td scope="row"><%= @application.TreatmentPlan %></td>
+  </tr>
+  <tr>
+    <td scope="row">Applied for Long-term Housing</td>
+    <td scope="row"><%= check_box_tag 'appliedForLongTermHousing', '', @application.appliedForLongTermHousing, onclick:"return false;" %></td>
+  </tr>
+  <tr>
+    <td scope="row">Where</td>
+    <td scope="row"><%= @application.whereLongTermHousing %></td>
+  </tr>
+  <tr>
+    <td scope="row">Prayer requests</td>
+    <td scope="row"><%= @application.prayerRequests %></td>
+  </tr>
+  <tr>
+    <td scope="row">First Visit</td>
+    <td scope="row"><%= check_box_tag 'isFirstVisit', '', @application.isFirstVisit, onclick:"return false;" %></td>
+  </tr>
+  <tr>
+    <td scope="row">Wants Info</td>
+    <td scope="row"><%= check_box_tag 'wantsInfo', '', @application.wantsInfo, onclick:"return false;" %></td>
+  </tr>
+  <tr>
+    <td scope="row">Insurance Covers Housing</td>
+    <td scope="row"><%= check_box_tag 'wantsInfo', '', @application.insuranceCoversHousing, onclick:"return false;" %></td>
+  </tr>
+  <tr>
+    <td scope="row">Future Scheduled Appts</td>
+    <td scope="row"><%= @application.futureScheduledAppts %></td>
+  </tr>
+  <tr>
+    <td scope="row">Requested Arrival Date</td>
+    <td scope="row"><%= Date.parse(@application.ArrivalDate.to_s).strftime("%m/%d/%Y") %></td>
+  </tr>
+  <tr>
+    <td scope="row">Requested Departure Date</td>
+    <td scope="row"><%= Date.parse(@application.DepartureDate.to_s).strftime("%m/%d/%Y") %></td>
+  </tr>
+
+  </tbody>
+</table>
+
+<%if session[:user_role] == "admin" %>
+  <div class="actions" style="margin:30px">
+    <%= link_to 'Back', applications_path %> |
+    <%= link_to 'Edit', edit_application_path(@application) %> |
+    <%= link_to 'Book', app_booking_path(id: @application) %>
+  </div>
+<%else%>
+  <div style="margin:30px">
+    <%= link_to 'Back to dashboard', show_dash_path %>
+  </div>
+<%end %>

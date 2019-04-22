@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1 style="margin:30px">Mercy Houses</h1>
+
+<%= form_tag mercyhomes_path, :method => :get do %>
+  <div class="form-row default-margin">
+    <div class="field form-group" style="margin-top: 5px;">
+      House Name:
+    </div>
+    <div class="field form-group col-md-3">
+      <%= text_field_tag "name", nil, value: "#{params['name']}", class: "form-control" %>
+    </div>
+    <div class="field form-group col-md-3">
+      <%= submit_tag 'Search', class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>
+
+<% @mercyhomes.each do |house| %>
+  <div style="padding-bottom: 2%; padding-left: 2%; padding-right: 2%;">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">
+          <%= link_to house.HouseName, house %>
+        </h5>
+        <h6 class="card-subtitle mb-2 text-muted"><%= house.HouseAddress %></h6>
+        <h6 class="card-subtitle mb-2 text-muted"><%= house.HouseCity %>, <%= house.HouseState %> <%= house.HouseZip %></h6>
+        <h7 class="card-link"><%= link_to 'See All Rooms', mercyrooms_path+"?utf8=✓&name=#{house.HouseName}&commit=Search" %></h7>
+        <h7 class="card-link"><%= link_to 'Add a New Room', new_mercyroom_path(:mercyhomes_id=>house.id) %></h7>
+        <h7 class="card-link"><%= link_to 'Edit', edit_mercyhome_path(house) %></h7>
+        <h7 class="card-link"><%= link_to 'Delete', house, method: :delete, data: { confirm: 'Are you sure?' } %></h7>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%= link_to 'New Mercy House', new_mercyhome_path, class: "btn btn-primary", style:"margin:30px" %>

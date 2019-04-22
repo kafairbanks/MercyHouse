@@ -1,0 +1,71 @@
+<%= form_with(model: booking, local: true) do |form| %>
+  <% if booking.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(booking.errors.count, "error") %> prohibited this booking from being saved:</h2>
+
+      <ul>
+      <% booking.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if !@application.nil? and !@application.BackgroundCheckCompleted and !@application.BCWaived %>
+    <h5 align="center", style="color: red; padding-bottom: 2%;">WARNING: BACKGROUND CHECK NOT COMPLETED</h5>
+  <%end%>
+
+  <div class="form-row">
+    <div class="field form-group col-md-6">
+      <%= form.label :applicants_id, "Applicant ID" %>
+    </div>
+    <div class="field form-group col-md-6">
+      <%= form.number_field :applicants_id, id: "applicants_id", class: "form-control", placeholder: "Applicant ID", value: @application.nil? ? nil : @application.applicants_id, :required => true, readonly: @application.nil? ? false : true %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="field form-group col-md-6">
+      <%= form.label :application_id, "Application ID" %>
+    </div>
+    <div class="field form-group col-md-6">
+      <%= form.number_field :application_id, id: "application_id", class: "form-control", placeholder: "Application ID", value: @application.nil? ? nil : @application.id, :required => true, readonly: @application.nil? ? false : true %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="field form-group col-md-6">
+      <%= form.label :mercyrooms_id, "Room ID" %>
+    </div>
+    <div class="field form-group col-md-6">
+      <%= form.number_field :mercyrooms_id, id: "mercyrooms_id", class: "form-control", placeholder: "Room ID", value: @filtered_rooms.first.id, :required => true %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <%= form.label :StartDate, "Start Date" %>
+    </div>
+    <div class="field form-group col-md-6">
+      <%= form.date_field :StartDate, id: "StartDateBooking", class: "form-control", value: @start_date, :readonly => true, :required => true %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <%= form.label :EndDate, "End Date" %>
+    </div>
+    <div class="field form-group col-md-6">
+      <%= form.date_field :EndDate, id: "EndDateBooking", class: "form-control", value: @end_date, :readonly => true, :required => true %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+    </div>
+    <div class="actions col-md-6" align="left">
+      <%= form.submit "Submit Booking", class: "btn btn-primary" %>
+    </div>
+  </div>
+
+<% end %>

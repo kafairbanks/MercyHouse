@@ -1,0 +1,51 @@
+<%= form_with(model: mercyroom, local: true) do |form| %>
+  <% if mercyroom.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(mercyroom.errors.count, "error") %> prohibited this mercyroom from being saved:</h2>
+
+      <ul>
+        <% mercyroom.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-row">
+    <div class="field form-group col-md-6">
+      <%= form.label :mercyhomes_id, "Mercy House ID" %>
+      <%= form.text_field :mercyhomes_id, id: "mercyhomes_id", class: "form-control", value: @mercyroom.mercyhomes_id, :required => true %>
+    </div>
+
+    <div class="field form-group col-md-6">
+      <%= form.label :RoomName, "Room Name" %>
+      <%= form.text_field :RoomName, id: "RoomName", class: "form-control", placeholder: "Room Name", value: @mercyroom.RoomName, :required => true %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="field form-group col-md-12">
+      <%= form.label :RoomDesc, "Room Description" %>
+      <%= form.text_field :RoomDesc, id: "RoomDesc", class: "form-control", placeholder: "Description", value: @mercyroom.RoomDesc %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="field form-group col-md-3">
+      <%= form.check_box :firstfloor, style: "margin-right: 10px;", value: @mercyroom.firstfloor %>
+      <%= form.label :firstfloor, "First Floor Room" %>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="form-row justify-content-md-center">
+      <div class="actions col-md-2">
+        <%= form.submit "Create Room", class: "btn btn-primary" %>
+      </div>
+      <div class="actions col-md-2">
+        <%#= form.submit "Add Another Room", class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+
+<% end %>

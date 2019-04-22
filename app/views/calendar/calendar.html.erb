@@ -1,0 +1,29 @@
+<h4 class="header default-margin" >
+  Calendar
+</h4>
+
+<div style="margin: 30px;">
+  <%= render 'form' %>
+</div>
+
+<div class="default-margin" id="calendar">
+  <%= month_calendar events: @bookings do |date, bookings| %>
+    <%= date.day %>
+    <% bookings.each do |booking| %>
+      <a href="<%= booking_path(booking) %>" style="color: black; text-decoration:transparent">
+        <div class="p-1 pb-2 my-3 rounded" style="background-color: <%= '#' + booking.color %>">
+          <div>
+            <%= booking.HouseName%>
+          </div>
+          <div>
+            <%= booking.RoomName%>
+          </div>
+          <div>
+            <%= booking.AName %> <br>
+          </div>
+        </div>
+      </a>
+    <% end %>
+  <% end %>
+</div>
+

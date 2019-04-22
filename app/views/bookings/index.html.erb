@@ -1,0 +1,72 @@
+<p id="notice"><%= notice %></p>
+
+<h1 class="default-margin">Bookings</h1>
+
+<%= form_tag bookings_path, :method => :get do %>
+  <div class="form-row default-margin">
+    <div class="field form-group col-md-2" style="margin-top: 5px;">
+      Applicant Name:
+    </div>
+    <div class="field form-group col-md-3">
+      <%= text_field_tag "name", nil, value: "#{params['name']}", class: "form-control" %>
+    </div>
+    <div class="field form-group col-md-2">
+      <%= submit_tag 'Search', class: "btn btn-primary" %>
+    </div>
+    <div class="field form-group col-md-3" align="right">
+      <%= link_to 'New Booking', applications_path, class: "btn btn-primary", style: "vertical-align: middle;" %>
+    </div>
+  </div>
+  <div class="form-row default-margin">
+    <div class="field form-group col-md-2" style="margin-top: 5px;">
+      Filter:
+    </div>
+    <div class="field form-group col-md-2">
+      <%= select_tag :status_filter, options_for_select(@booked_statuses,
+                                                      {:selected => params[:status_filter]}), :include_blank => 'All',
+                     :onchange => 'this.form.submit()', :class => "form-control" %>
+    </div>
+
+    <% if @bookings.all.to_a.length >= 10 or params[:page].to_i >= 1 %>
+      <div class="field form-group col-md-1" align="right" style="margin-top: 5px;">
+        Show:
+      </div>
+      <div class="field form-group col-md-1">
+        <%= select_tag :per_page, options_for_select(@per_page_hash,
+                                                          {:selected => params[:per_page]}),
+                       :onchange => 'this.form.submit()', :class => "form-control" %>
+      </div>
+      <div class="field form-group col-md-3">
+        <%= will_paginate @bookings, renderer: BootstrapPaginationHelper::LinkRenderer %>
+      </div>
+    <%end%>
+  </div>
+<% end %>
+
+<table class="table table-striped table-responsive" style="margin:30px">
+  <thead class="thead-dark">
+  <tr>
+    <th scope="col">Name</th>
+    <th scope="col">Mercy House</th>
+    <th scope="col">Mercy Room</th>
+    <th scope="col">Start Date</th>
+    <th scope="col">End Date</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @bookings.each do |booking| %>
+    <tr>
+      <td scope="row"><%= link_to booking.AName, applicant_path(booking.applicants_id) %></td>
+      <td scope="row"><%= booking.HouseName %></td>
+      <td scope="row"><%= booking.RoomName %></td>
+      <td scope="row"><%= booking.StartDate.nil? ? nil : booking.StartDate.strftime("%m/%d/%Y") %></td>
+      <td scope="row"><%= booking.EndDate.nil? ? nil : booking.EndDate.strftime("%m/%d/%Y") %></td>
+      <td scope="row"><%= link_to 'Details', booking %></td>
+      <td scope="row"><%= link_to 'Edit', edit_booking_path(booking) %></td>
+      <td scope="row"><%= link_to 'Delete', booking, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

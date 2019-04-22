@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<div style="margin:30px">
+  <h1>Changing user: <%= @user.name %>'s role</h1>
+  <br>
+  <%= form_with(model: @user, local: true) do |form| %>
+    <% if @user.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+        <ul>
+          <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-row">
+        <div class="field form-group col-md-4">
+            <%= form.label :role, "Role:" %>
+            <%= form.select :role, options_for_select(@validRoleList,{ selected: @user.role }), {}, id: "role", class: "form-control", :required => true %>
+        </div>
+    </div>
+    <div class="actions" style="padding-bottom: 2%;" align="center">
+        <%= form.submit "Update", data: { confirm: "Are you sure you want to change #{@user.name}\'s role" }, class: "btn btn-danger" %>
+    </div>
+  <% end %>
+
+  <%= link_to 'Details', @user %> |  
+  <%= link_to 'See all users', users_path %>
+
+</div>

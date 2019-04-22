@@ -1,0 +1,69 @@
+<h1 style="margin: 30px;">Editing Booking <%=@booking.id%></h1>
+
+<p style="margin: 30px; color: red;" id="notice"><%= notice %></p>
+
+<div style="margin: 30px;">
+  <%= form_tag edit_booking_path, :method => :get do -%>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <h3 style="margin-bottom: 30px">Available Rooms</h3>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <%= label :StartDate, "Start Date" %>
+          </div>
+          <div class="field form-group col-md-6">
+            <%= date_field_tag "StartDate", nil, value: @start_date , class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <%= label :EndDate, "End Date" %>
+          </div>
+          <div class="field form-group col-md-6">
+            <%= date_field_tag "EndDate", nil, value: @end_date , class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+          </div>
+          <div class="field form-group col-md-6">
+            <%= submit_tag "Refresh to See Available Rooms", class: "btn btn-primary" %>
+          </div>
+        </div>
+  <% end -%>
+  <h3 style="margin-bottom: 30px; margin-top: 30px;">Booking</h3>
+  <div>
+    <%= render 'bookingform', booking: @booking %>
+  </div>
+  </div>
+
+  <div class="form-group col-md-6">
+    <table class="table table-striped table-responsive" style="padding-left:60px">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">Available Room Id</th>
+        <th scope="col">House Name</th>
+        <th scope="col">Available Room Description</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @filtered_rooms.each do |room| %>
+        <tr>
+          <td scope="row"><%= room.id %></td>
+          <td scope="row"><%= room.HouseName %></td>
+          <td scope="row"><%= room.RoomDesc %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  </div>
+
+</div>
+
+<%= link_to 'Details', @booking %> |
+<%= link_to 'Back', bookings_path %>

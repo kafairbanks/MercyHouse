@@ -1,0 +1,33 @@
+<%= form_with(model: report, local: true) do |form| %>
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <%= form.label :mhomeid, "Choose a House:" %>
+        </div>
+        <div class="field form-group col-md-6">
+            <%= form.select :mhomeid, options_for_select(@homeHash), {}, class: "form-control", :required => true %>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+        <%= form.label :dstart, "Start Date:" %>
+        </div>
+        <div class="field form-group col-md-3">
+        <%= form.date_field :dstart, id: "StartDate", class: "form-control", value: (Date.current - 3.month).strftime('%Y-%m-%d'), :required => true %>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+        <%= form.label :dend, "End Date:" %>
+        </div>
+        <div class="field form-group col-md-3">
+        <%= form.date_field :dend, id: "EndDate", class: "form-control", value: Date.current.strftime('%Y-%m-%d'), :required => true %>
+        </div>
+    </div>
+
+  <div class="actions" align="center">
+    <%= form.submit "Create Report", class: "btn btn-primary", data: {disable_with: false} %>
+  </div>
+<%end%>

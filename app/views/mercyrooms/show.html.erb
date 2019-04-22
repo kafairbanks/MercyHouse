@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<table class="table table-striped table-responsive" style="margin:30px">
+  <tbody>
+
+  <tr>
+    <td scope="row">Mercy House ID</td>
+    <td scope="row"><%= @mercyroom.mercyhomes_id %></td>
+  </tr>
+  <tr>
+    <td scope="row">Room Name</td>
+    <td scope="row"><%= @mercyroom.RoomName %></td>
+  </tr>
+  <tr>
+    <td scope="row">Room Description</td>
+    <td scope="row"><%= @mercyroom.RoomDesc %></td>
+  </tr>
+
+  </tbody>
+</table>
+<div style="margin:30px">
+  <%= link_to 'Edit', edit_mercyroom_path(@mercyroom) %> |
+  <%= link_to 'Back', mercyrooms_path %>
+</div>

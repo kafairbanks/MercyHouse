@@ -1,0 +1,67 @@
+<%= form_with(model: booking, local: true) do |form| %>
+  <% if booking.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(booking.errors.count, "error") %> prohibited this booking from being saved:</h2>
+
+      <ul>
+        <% booking.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-row">
+    <div class="field form-group col-md-6">
+      <%= form.label :applicants_id, "Applicant ID" %>
+    </div>
+    <div class="field form-group col-md-6">
+      <%= form.number_field :applicants_id, readonly: true, id: "applicants_id", class: "form-control", placeholder: "Applicant ID", value: @booking.applicants_id, :required => true %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="field form-group col-md-6">
+      <%= form.label :application_id, "Application ID" %>
+    </div>
+    <div class="field form-group col-md-6">
+      <%= form.number_field :application_id, readonly: true, id: "application_id", class: "form-control", placeholder: "Application ID", value: @booking.application_id, :required => true %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="field form-group col-md-6">
+      <%= form.label :mercyrooms_id, "Room ID" %>
+    </div>
+    <div class="field form-group col-md-6">
+      <%= form.number_field :mercyrooms_id, id: "mercyrooms_id", class: "form-control", placeholder: "Room ID", value: @filtered_rooms.first.id, :required => true %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <%= form.label :StartDate, "Start Date" %>
+    </div>
+    <div class="field form-group col-md-6">
+      <%= form.date_field :StartDate, id: "StartDateBooking", class: "form-control", value: @start_date, :readonly => true, :required => true %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <%= form.label :EndDate, "End Date" %>
+    </div>
+    <div class="field form-group col-md-6">
+      <%= form.date_field :EndDate, id: "EndDateBooking", class: "form-control", value: @end_date, :readonly => true, :required => true %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+    </div>
+    <div class="actions col-md-6" align="left">
+      <%= form.submit "Update Booking", class: "btn btn-primary" %>
+    </div>
+  </div>
+
+<% end %>

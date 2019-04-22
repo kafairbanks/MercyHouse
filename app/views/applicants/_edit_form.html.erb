@@ -1,0 +1,207 @@
+<%= form_with(model: applicant, local: true) do |form| %>
+  <% if applicant.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(applicant.errors.count, "error") %> prohibited this applicant from being saved:</h2>
+
+      <ul>
+        <% applicant.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <h4 class="header">Emergency Contact and Medical Information</h4>
+
+  <div class="form-row">
+    <div class="field form-group col-md-6">
+      <%= form.label :AName, "Applicants's Name" %>
+      <%= form.text_field :AName, id: "AName", class: "form-control", placeholder: "Applicant Name", value: @applicant.AName, :required => true %>
+    </div>
+
+    <div class="field form-group col-md-6">
+      <%= form.label :AEmail, "Applicants's Email" %>
+      <%= form.text_field :AEmail, id: "AEmail", class: "form-control", placeholder: "name@example.com", value: @applicant.AEmail, :required => true %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="field form-group col-md-6">
+      <%= form.label :SPName, "Spouse's/Parent's Name" %>
+      <%= form.text_field :SPName, id: "SPName", class: "form-control", placeholder: "Spouse/Parent Name", value: @applicant.SPName %>
+    </div>
+    <div class="field form-group col-md-6">
+      <%= form.label :CGName, "Care Giver's Name" %>
+      <%= form.text_field :CGName, id: "CGName", class: "form-control", placeholder: "Care Giver Name", value: @applicant.CGName %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="field form-group col-md-3">
+      <%= form.label :SPHomePhone, "Spouse's/Parent's Home Phone" %>
+      <%= form.telephone_field :SPHomePhone, id: "SPHomePhone", class: "form-control", placeholder: "XXX-XXX-XXXX", value: @applicant.SPHomePhone %>
+    </div>
+    <div class="field form-group col-md-3">
+      <%= form.label :SPCellPhone, "Spouse's/Parent's Cell Phone" %>
+      <%= form.telephone_field :SPCellPhone, id: "SPCellPhone", class: "form-control", placeholder: "XXX-XXX-XXXX", value: @applicant.SPCellPhone %>
+    </div>
+    <div class="field form-group col-md-3">
+      <%= form.label :CGHomePhone, "Care Giver's Home Phone" %>
+      <%= form.telephone_field :CGHomePhone, id: "CGHomePhone", class: "form-control", placeholder: "XXX-XXX-XXXX", value: @applicant.CGHomePhone %>
+    </div>
+    <div class="field form-group col-md-3">
+      <%= form.label :CGCellPhone, "Care Giver's Cell Phone" %>
+      <%= form.telephone_field :CGCellPhone, id: "CGCellPhone", class: "form-control", placeholder: "XXX-XXX-XXXX", value: @applicant.CGCellPhone %>
+    </div>
+  </div>
+
+  <div class="field form-row">
+    <div class="form-group col-md-6">
+      <%= form.label :SPAddress, "Spouses's/Parent's Address" %>
+      <%= form.text_field :SPAddress, id: "SPAddress", class: "form-control", placeholder: "1234 Main St", value: @applicant.SPAddress %>
+    </div>
+    <div class="field form-group col-md-6">
+      <%= form.label :CGAddress, "Care Giver's Address" %>
+      <%= form.text_field :CGAddress, id: "CGAddress", class: "form-control", placeholder: "1234 Main St", value: @applicant.CGAddress %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="field form-group col-md-2">
+      <%= form.label :SPCity, "City" %>
+      <%= form.text_field :SPCity, id: "SPCity", class: "form-control", placeholder: "City", value: @applicant.SPCity %>
+    </div>
+    <div class="field form-group col-md-2">
+      <%= form.label :SPState, "State" %>
+      <%= form.text_field :SPState, id: "SPState", class: "form-control", placeholder: "State", value: @applicant.SPState %>
+    </div>
+    <div class="field form-group col-md-2">
+      <%= form.label :SPZip, "ZIP" %>
+      <%= form.text_field :SPZip, id: "SPZip", class: "form-control", placeholder: "XXXXX", value: @applicant.SPZip %>
+    </div>
+    <div class="field form-group col-md-2">
+      <%= form.label :CGCity, "City" %>
+      <%= form.text_field :CGCity, id: "CGCity", class: "form-control", placeholder: "City", value: @applicant.CGCity %>
+    </div>
+    <div class="field form-group col-md-2">
+      <%= form.label :CGState, "State" %>
+      <%= form.text_field :CGState, id: "CGState", class: "form-control", placeholder: "State", value: @applicant.CGState %>
+    </div>
+    <div class="field form-group col-md-2">
+      <%= form.label :CGZip, "ZIP" %>
+      <%= form.text_field :CGZip, id: "CGZip", class: "form-control", placeholder: "XXXXX", value: @applicant.CGZip %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="field form-group col-md-6">
+      <%= form.label :SPEmail, "Spouse/Parent's Email" %>
+      <%= form.email_field :SPEmail, id: "SPEmail", class: "form-control", placeholder: "name@example.com", value: @applicant.SPEmail %>
+    </div>
+    <div class="field form-group col-md-6">
+      <%= form.label :CGEmail, "Care Giver's Email" %>
+      <%= form.email_field :CGEmail, id: "CGEmail", class: "form-control", placeholder: "name@example.com", value: @applicant.CGEmail %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="field form-group col-md-4">
+      <%= form.check_box :AMinor, style: "margin-right: 10px;", value: @applicant.AMinor %>
+      <%= form.label :AMinor, "Check if Applicant is a Minor" %>
+    </div>
+    <div class="field form-group col-md-4">
+      <%= form.label :AAge, "Minor's Age" %>
+      <%= form.number_field :AAge, id: "AAge", class: "form-control", placeholder: "Age", value: @applicant.AAge %>
+    </div>
+  </div>
+
+  <div class="field form-group">
+    <%= form.check_box :allowsUseOfName, style: "margin-right: 10px;", value: @applicant.allowsUseOfName %>
+    <%= form.label :allowsUseOfName, "I will allow use of my name and diagnosis in the church and family newsletter" %>
+  </div>
+
+  <h4 class="header">Alternative Emergency Contacts</h4>
+
+  <div class="form-row">
+    <div class="field form-group col-md-6">
+      <%= form.label :EC1Name, "Primary Emergency Contact" %>
+      <%= form.text_field :EC1Name, id: "EC1Name", class: "form-control", placeholder: "Primary Emergency Contact", value: @applicant.EC1Name %>
+    </div>
+    <div class="field form-group col-md-6">
+      <%= form.label :EC2Name, "Secondary Emergency Contact" %>
+      <%= form.text_field :EC2Name, id: "EC2Name", class: "form-control", placeholder: "Secondary Emergency Contact", value: @applicant.EC2Name %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="field form-group col-md-3">
+      <%= form.label :EC1HomePhone, "Primary's Home Phone" %>
+      <%= form.telephone_field :EC1HomePhone, id: "EC1HomePhone", class: "form-control", placeholder: "XXX-XXX-XXXX", value: @applicant.EC1HomePhone %>
+    </div>
+    <div class="field form-group col-md-3">
+      <%= form.label :EC1CellPhone, "Primary's Cell Phone" %>
+      <%= form.telephone_field :EC1CellPhone, id: "EC1CellPhone", class: "form-control", placeholder: "XXX-XXX-XXXX", value: @applicant.EC1CellPhone %>
+    </div>
+    <div class="field form-group col-md-3">
+      <%= form.label :EC2HomePhone, "Secondary's Home Phone" %>
+      <%= form.telephone_field :EC2HomePhone, id: "EC2HomePhone", class: "form-control", placeholder: "XXX-XXX-XXXX", value: @applicant.EC2HomePhone %>
+    </div>
+    <div class="field form-group col-md-3">
+      <%= form.label :EC2CellPhone, "Secondary's Cell Phone" %>
+      <%= form.telephone_field :EC2CellPhone, id: "EC2CellPhone", class: "form-control", placeholder: "XXX-XXX-XXXX", value: @applicant.EC2CellPhone %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="field form-group col-md-6">
+      <%= form.label :EC1Address, "Primary's Address" %>
+      <%= form.text_field :EC1Address, id: "EC1Address", class: "form-control", placeholder: "1234 Main St", value: @applicant.EC1Address %>
+    </div>
+    <div class="field form-group col-md-6">
+      <%= form.label :EC2Address, "Secondary's Address" %>
+      <%= form.text_field :EC2Address, id: "EC2Address", class: "form-control", placeholder: "1234 Main St", value: @applicant.EC2Address %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="field form-group col-md-2">
+      <%= form.label :EC1City, "City" %>
+      <%= form.text_field :EC1City, id: "EC1City", class: "form-control", placeholder: "City", value: @applicant.EC1City %>
+    </div>
+    <div class="field form-group col-md-2">
+      <%= form.label :EC1State, "State" %>
+      <%= form.text_field :EC1State, id: "EC1State", class: "form-control", placeholder: "State", value: @applicant.EC1State %>
+    </div>
+    <div class="field form-group col-md-2">
+      <%= form.label :EC1Zip, "ZIP" %>
+      <%= form.text_field :EC1Zip, id: "EC1Zip", class: "form-control", placeholder: "XXXXX", value: @applicant.EC1Zip %>
+    </div>
+    <div class="field form-group col-md-2">
+      <%= form.label :EC2City, "City" %>
+      <%= form.text_field :EC2City, id: "EC2City", class: "form-control", placeholder: "City", value: @applicant.EC2City %>
+    </div>
+    <div class="field form-group col-md-2">
+      <%= form.label :EC2State, "State" %>
+      <%= form.text_field :EC2State, id: "EC2State", class: "form-control", placeholder: "State", value: @applicant.EC2State %>
+    </div>
+    <div class="field form-group col-md-2">
+      <%= form.label :EC2Zip, "ZIP" %>
+      <%= form.text_field :EC2Zip, id: "EC2Zip", class: "form-control", placeholder: "XXXXX", value: @applicant.EC2Zip %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="field form-group col-md-6">
+      <%= form.label :EC1Email, "Primary's Email" %>
+      <%= form.email_field :EC1Email, id: "EC1Email", class: "form-control", placeholder: "name@example.com", value: @applicant.EC1Email %>
+    </div>
+    <div class="field form-group col-md-6">
+      <%= form.label :EC2Email, "Secondary's Email" %>
+      <%= form.email_field :EC2Email, id: "EC2Email", class: "form-control", placeholder: "name@example.com", value: @applicant.EC2Email %>
+    </div>
+  </div>
+
+  <div class="actions" align="center">
+    <%= form.submit "Update Applicant", class: "btn btn-primary" %>
+  </div>
+<% end %>
